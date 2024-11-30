@@ -1,186 +1,197 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate , } from "react-router-dom";
+import {FaEye, FaEyeSlash} from "react-icons/fa";
 
 const Daftar =() => {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [schoolname, setSchoolname] = useState('');
-    const [message, setMessage] = useState('');
-    const [schooladdress, setSchooladdress] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [district, setDistrict] = useState('');
-    const [province, setProvince] = useState('');
-    const [date, setDate] = useState('');
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleSchoolnameChange = (event) => {
-        setSchoolname(event.target.value);
-    };
-
-    const handleSchooladdressChange = (event) => {
-        setSchooladdress(event.target.value);
-    };
-
-    const handleDistrictChange = (event) => {
-        setDistrict(event.target.value);
-    };
-
-    const handleProvinceChange = (event) => {
-        setProvince(event.target.value);
-    };
-
-    const handleDateChange = (event) => {
-        setDate(event.target.value);
-    };
-
-
+    
     const handleTogglePasswordVisibility = () => setShowPassword (!showPassword);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setMessage(`Mauliate, ${username}! Kamu telah mendaftar di web ini.`);
 
-        localStorage.setItem("username" , username);
+        localStorage.setItem("email" , email);
         localStorage.setItem("password", password);
         alert("registrasi berhasil silahkan login");
         navigate('/Login');
     
-
+        setEmail('');
         setUsername('');
         setPassword('');
-        setSchoolname('');
-        setSchooladdress('');
-        setDistrict('');
-        setProvince('');
-        setDate('');
     };
 
     return (
         <div
         style={{
-            backgroundImage:`url('background.jpg')`,
-            backgroundSize:"cover",
-            backgroundPosition:"center",
-            backgroundRepeat:"no-repeat",
-            minHeight:"100vh",
             display:"flex",
             justifyContent:"center",
             alignItems:"center",
+            minHeight:"100vh",
+            backgroundColor:"#F0F4F8",
             padding:"20px",
-        }}
-            >
-        <div className="container mt-5"
-            style={{
-                backgroundColor:"rgba(0, 51, 102, 0.9)",
-                padding:"30px",
-                borderRadius:"8px",
-                boxShadow:"0px 4px 8px rgba(0, 0, 0, 0.1)",
-                maxWidth:"500px",
+        }}>
+        <div style={{
+                display:"flex",
+                flexDirection:"row",
+                backgroundColor:"#fff",
+                borderRadius:"10px",
+                boxShadow:"0 8px 20px rgba(0, 0, 0, 0.1)",
+                maxWidth:"800px",
                 width:"100%",
-                borderColor:"#ccc",
+                overflow:"hidden",
+                border:"1px solid #ddd",
             }} >
-                
-            <h2 className="text-center">Registration Form</h2>
-            <form onSubmit={handleSubmit} className="mt-4"
-            style={{
-                backgroundColor:"#003366",
-                color:"white",
-                padding:"20px",
-                borderRadius:"8px"
-            }}
-            >
-                <div className="mb-3">
-                    <label htmlFor="username" className="form-label">Username:</label>
+
+            <div style={{
+                width:"50%",
+                overflow:"hidden",
+                position:"relative",
+            }}>
+                <video style={{
+                    width:"100%",
+                    height:"100%",
+                    objectFit:"cover",
+                }}
+                src="bgvideo.mp4"
+                autoPlay
+                loop
+                muted
+                />
+            </div>
+
+            <div style={{
+                padding:"40px",
+                width:"50%",
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"center",
+            }}>
+            
+            <h3 style={{
+                color:"#003366",
+                fontWeight:"600",
+                marginBottom:"20px",
+                fontSize:"24px",
+                textAlign:"center"
+            }}>Sign Up Here</h3>
+
+            <form onSubmit={handleSubmit} style={{
+                display:"grid",
+                gap:"15px"
+            }}>
+
                     <input
                     type="text"
-                    id="username"
-                    className="form-control"
+                    placeholder="username"
                     value={username}
-                    onChange={handleUsernameChange}
-                    required
-                    />
-                </div>
-                <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password:</label>
-                <div className="input-group">
+                    onChange={(e) => setUsername(e.target.value)}
+                    required 
+                    style={{
+                        padding:"12px",
+                        fontSize:"16px",
+                        borderRadius:"5px",
+                        border:"1px solid #ddd",
+                        boxShadow:"inset 0 1px 2px rgba(0, 0, 0, 0.1)",
+                        transition:"all 0.3s"
+                    }}
+                />
+
+                    <input
+                    type="email"
+                    placeholder="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required 
+                    style={{
+                        padding:"12px",
+                        fontSize:"16px",
+                        borderRadius:"5px",
+                        border:"1px solid #ddd",
+                        boxShadow:"inset 0 1px 2px rgba(0, 0, 0, 0.1)",
+                        transition:"all 0.3s"
+                    }}
+                />
+                
+                
+                <div style={{
+                    position:"relative"
+                }}>
                     <input
                     type={showPassword ? "text" : "password"}
-                    id="password"
-                    className="form-control"
+                    placeholder="password"
                     value={password}
-                    onChange={handlePasswordChange}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
+                    style={{
+                        padding:"12px",
+                        fontSize:"16px",
+                        borderRadius:"5px",
+                        border:"1px solid #ddd",
+                        width:"100%",
+                        boxShadow:"inset 0 1px 2px rgba(0, 0, 0, 0.1)",
+                        transition:"all 0.3s"
+                    }}
                     />
-                    
-                    </div>
-                    </div>
-                <div className="mb-3">
-                <label htmlFor="schoolname" className="form-label">School Name:</label>
-                <input
-                type="text"
-                id="schoolname"
-                className="form-control"
-                value={schoolname}
-                onChange={handleSchoolnameChange}
-                required
-                />
                 </div>
 
-                <div className="mb-3">
-                <label htmlFor="schooladdress" className="form-label">School Address:</label>
-                <input
-                type="text"
-                id="schooladdress"
-                className="form-control"
-                value={schooladdress}
-                onChange={handleSchooladdressChange}
-                required
-                />
-                </div>
-                <div className="mb-3">
-                <label htmlFor="district" className="form-label">District:</label>
-                <input
-                type="text"
-                id="district"
-                className="form-control"
-                value={district}
-                onChange={handleDistrictChange}
-                required
-                />
-                </div>
-                <div className="mb-3">
-                <label htmlFor="province" className="form-label">Province:</label>
-                <input
-                type="text"
-                id="province"
-                className="form-control"
-                value={province}
-                onChange={handleProvinceChange}
-                required
-                />
-                </div>
-                <div className="mb-3">
-                <label htmlFor="date" className="form-label">Date Of Birth:</label>
-                <input
-                type="date"
-                id="date"
-                className="form-control"
-                value={date}
-                onChange={handleDateChange}
-                required
-                />
-                </div>
-                <button type="submit" className="btn btn-primary">Register</button>
+                <button type="submit"
+                    style={{
+                        marginTop:"20px",
+                        justifyContent:"center",
+                        padding:"12px",
+                        fontSize:"18px",
+                        borderRadius:"5px",
+                        border:"none",
+                        width:"100%",
+                        backgroundColor:"#4A90E2",
+                        color:"#ffffff",
+                        cursor:"pointer",
+                        transition:"background-color 0.3s ease"
+                    }}
+
+                    onMouseEnter={(e) => 
+                        (e.target.style.transform="scale(1.05)")
+                    }
+                    onMouseLeave={(e) => 
+                    (e.target.style.transform="scale(1)")
+                    }
+
+                >Sign Up</button>           
+                
+            <div className="mt-3 text-center">
+                <p>Have An Account?
+                    <button
+                        className="btn btn-link"
+                        onClick={() => navigate('/login')}>
+                            Sign In Here
+                    </button>
+                </p>
+            </div>
             </form>
-            {message && <div className="alert alert-success mt-3"><p>{message}</p></div>}
+            {message && <div style={{
+                fontSize:"18px",
+                padding:"10px",
+                borderRadius:"5px",
+                border:"none",
+                backgroundColor:"#DFF0D8",
+                color:"#3C763D",
+                cursor:"pointer",
+                transition:"all 0.3 ease",
+                boxShadow:"0px 4px 8px rgba(0, 0, 0, 0.1)",
+                
+            }}>
+                {message}
+
+    
+
+        </div>}
+        </div>
         </div>
         </div>
     );
